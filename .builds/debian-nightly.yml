@@ -1,0 +1,17 @@
+image: debian/stable
+sources:
+  - https://git.sr.ht/~rjframe/utility_belt_rs
+tasks:
+  - install-rustup: |
+      curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain none -y
+  - install-nightly: |
+      $HOME/.cargo/bin/rustup toolchain install nightly \
+          --allow-downgrade --profile minimal
+  - install-cargo-hack: |
+      $HOME/.cargo/bin/cargo install cargo-hack
+  - build: |
+      cd utility_belt_rs
+      $HOME/.cargo/bin/cargo hack --each-feature --no-dev-deps build
+  - test: |
+      cd utility_belt_rs
+      $HOME/.cargo/bin/cargo hack --each-feature test

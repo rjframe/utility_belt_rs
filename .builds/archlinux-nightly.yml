@@ -1,0 +1,16 @@
+image: archlinux
+packages:
+  - rustup
+sources:
+  - https://git.sr.ht/~rjframe/utility_belt_rs
+tasks:
+  - install-nightly: |
+      rustup toolchain install nightly --allow-downgrade --profile minimal
+  - install-cargo-hack: |
+      cargo install cargo-hack
+  - build: |
+      cd utility_belt_rs
+      cargo hack --each-feature --no-dev-deps build
+  - test: |
+      cd utility_belt_rs
+      cargo hack --each-feature test
