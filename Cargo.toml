@@ -1,0 +1,18 @@
+[package]
+name = "utility_belt"
+version = "0.1.0"
+edition = "2018"
+
+[features]
+default = ["config", "iterators"]
+config = ["async-std", "iterators"]
+config_global = ["config", "once_cell"]
+iterators = []
+secure_string = []
+
+[dependencies]
+async-std = { version = "1.9.0", optional = true }
+once_cell = { version = "1.8.0", optional = true }
+
+[dev-dependencies]
+async-std = { version = "1.9.0", features = ["attributes"] }
